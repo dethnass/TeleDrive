@@ -1,6 +1,6 @@
 import React from 'react'
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './index.css'
@@ -8,13 +8,16 @@ import reportWebVitals from './reportWebVitals'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 
-ReactDOM.render(
+const container = document.getElementById('root')
+if (!container) throw new Error('Failed to find the root element')
+const root = createRoot(container)
+
+root.render(
   <ThemeSwitcherProvider defaultTheme="dark" themeMap={{ light: '/app.css', dark: '/app.dark.css' }}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </ThemeSwitcherProvider>,
-  document.getElementById('root')
+  </ThemeSwitcherProvider>
 )
 
 // If you want your app to work offline and load faster, you can change
