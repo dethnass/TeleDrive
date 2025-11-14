@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Button, Col, Descriptions, Input, Layout, Menu, Modal, Row, Table, TablePaginationConfig, Typography } from 'antd'
 import { FilterValue, SorterResult, TableCurrentDataSource } from 'antd/lib/table/interface'
-import moment from 'moment'
+import { format } from 'date-fns'
 import prettyBytes from 'pretty-bytes'
 import QueryString from 'qs'
 import React, { useEffect, useState } from 'react'
