@@ -514,7 +514,7 @@ const Login: React.FC<Props> = ({ me }) => {
                     <Typography.Paragraph type="secondary">
                       Authentication code sent to <b>+{phoneData.code}&bull;&bull;&bull;&bull;&bull;&bull;&bull;{phoneData.phone?.substring(phoneData.phone.length - 4)}</b>
                     </Typography.Paragraph>
-                    <OtpInput numInputs={5} value={otp as string || ''} onChange={setOtp} inputType="number" containerStyle={{ justifyContent: 'center' }} inputStyle={{
+                    <OtpInput numInputs={5} value={otp as string || ''} onChange={setOtp} isInputNum containerStyle={{ justifyContent: 'center' }} inputStyle={{
                       width: '2.7rem',
                       height: '2.7rem',
                       margin: '0 0.3rem 1rem 0',

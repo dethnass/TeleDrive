@@ -66,7 +66,7 @@ export const fetcher = async (url: string, authorization?: string): Promise<any>
 
   try {
     return await fetch()
-  } catch ({ response }) {
-    throw response
+  } catch (error: any) {
+    throw error?.response || error
   }
 }

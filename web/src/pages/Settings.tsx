@@ -85,8 +85,8 @@ const Settings: React.FC<Props> = ({ me, mutate, error }) => {
       await req.patch('/users/me/settings', { settings })
       notification.success({ message: 'Saved' })
       mutate()
-    } catch ({ response }) {
-      if ((response as any).status === 402) {
+    } catch (error: any) {
+      if (error?.response?.status === 402) {
         return notification.error({
           message: 'Premium Feature',
           description: 'Please upgrade your plan for using this feature'
