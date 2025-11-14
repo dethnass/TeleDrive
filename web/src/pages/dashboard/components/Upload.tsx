@@ -126,7 +126,7 @@ const Upload: React.FC<Props> = ({ dataFileList: [fileList, setFileList], parent
                     const sendData = async (forceDocument: boolean) => {
                       let peer: Api.InputPeerChannel | Api.InputPeerUser | Api.InputPeerChat | null = null
                       if (me.user.settings?.saved_location) {
-                        const [type, peerId, _, accessHash] = me.user.settings?.saved_location.split('/')
+                        const [type, peerId, _, accessHash] = me.user.settings.saved_location.split('/')
                         if (type === 'channel') {
                           peer = new Api.InputPeerChannel({
                             channelId: BigInt(peerId) as any,

@@ -33,6 +33,7 @@ module.exports = {
         querystring: require.resolve('querystring-es3'),
         https: require.resolve('https-browserify'),
         zlib: require.resolve('browserify-zlib'),
+        vm: require.resolve('vm-browserify'),
         // Node.js modules without browser equivalents
         net: false,
         tls: false,
