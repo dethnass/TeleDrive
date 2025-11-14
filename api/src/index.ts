@@ -97,9 +97,11 @@ app.use((req: Request, res: Response) => {
   }
 })
 
-app.listen(process.env.PORT || 4000, () => console.log(`Running at :${process.env.PORT || 4000}...`))
-
-console.log(listEndpoints(app))
+// Only start server if not in serverless environment (Vercel)
+if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
+  app.listen(process.env.PORT || 4000, () => console.log(`Running at :${process.env.PORT || 4000}...`))
+  console.log(listEndpoints(app))
+}
 
 module.exports = app
 module.exports.handler = serverless(app)
