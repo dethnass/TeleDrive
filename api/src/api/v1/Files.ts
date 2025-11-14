@@ -8,6 +8,7 @@ import { Request, Response } from 'express'
 import { appendFileSync, createReadStream, existsSync, mkdirSync, readdirSync, renameSync, rmSync, statSync, writeFileSync } from 'fs'
 import moment from 'moment'
 import multer from 'multer'
+import { tmpdir } from 'os'
 import { Api, Logger, TelegramClient } from 'teledrive-client'
 import { LogLevel } from 'teledrive-client/extensions/Logger'
 import { StringSession } from 'teledrive-client/sessions'
@@ -18,7 +19,8 @@ import { buildSort } from '../../utils/FilterQuery'
 import { Endpoint } from '../base/Endpoint'
 import { Auth, AuthMaybe } from '../middlewares/Auth'
 
-const CACHE_DIR = `${__dirname}/../../../../.cached`
+// Use /tmp for Vercel serverless compatibility
+const CACHE_DIR = process.env.VERCEL ? `${tmpdir()}/teledrive-cache` : `${__dirname}/../../../../.cached`
 
 @Endpoint.API()
 export class Files {
