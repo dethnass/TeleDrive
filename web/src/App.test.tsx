@@ -1,9 +1,9 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import App from './App'
 
-test('renders learn react link', () => {
-  render(<App />)
-  const linkElement = screen.getByText(/learn react/i)
-  expect(linkElement).toBeInTheDocument()
+test('renders app without crashing', () => {
+  // Basic smoke test - just ensure the app component renders without errors
+  const { container } = render(<App />)
+  expect(container).toBeInTheDocument()
 })

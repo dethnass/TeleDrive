@@ -26,7 +26,7 @@ import ReactPlayer from 'react-player'
 import { useHistory } from 'react-router'
 import useSWR from 'swr'
 import useSWRImmutable from 'swr/immutable'
-import { useDebounce } from 'use-debounce/lib'
+import { useDebounce } from 'use-debounce'
 import { directDownload } from '../../../utils/Download'
 import { fetcher } from '../../../utils/Fetcher'
 import Remove from '../../dashboard/components/Remove'
@@ -63,64 +63,6 @@ const Viewer: React.FC<Props> = ({ data, me, error, mutate, pageParams, isInDraw
         download: `${process.env.REACT_APP_API_URL || window.location.origin}/api/v1/files/${pageParams.id}?raw=1&dl=1&password=${sessionStorage.getItem(`pass-${pageParams.id}`)}`,
         share: `${window.location.origin}/view/${pageParams.id}`
       })
-      // setBlobURL(undefined)
-
-      // download(pageParams.id).then(stream => {
-      //   const video = document.querySelector('video')
-      //   const mime = 'video/mp4; codecs="mp4a.40.2,avc1.64001f"'
-      //   const mediaSource = new MediaSource()
-      //   if (video) {
-      //     setBlobURL(URL.createObjectURL(mediaSource))
-      //     // video.src = URL.createObjectURL(mediaSource)
-      //     mediaSource.addEventListener('sourceopen', async () => {
-      //       // URL.revokeObjectURL(video.src)
-      //       // mediaSource.duration = 8
-      //       // const buffer = mediaSource.addSourceBuffer(mime)
-      //       const buffer = mediaSource.addSourceBuffer(mime)
-      //       buffer.mode = 'sequence'
-      //       buffer.addEventListener('updateend', () => {
-      //         // buffer.remove(0, 0)
-      //         if (!buffer.updating && mediaSource.readyState === 'open') {
-      //           mediaSource.endOfStream()
-      //         }
-      //         // video.play()
-      //       })
-      //       buffer.addEventListener('error', console.error)
-
-      //       const reader = stream.getReader()
-
-      //       let isDone = false
-      //       while (!isDone) {
-      //         console.log(mediaSource.readyState)
-      //         const { done, value } = await reader.read()
-      //         if (done) {
-      //           isDone = done
-      //           break
-      //         }
-      //         console.log(mediaSource.readyState, value)
-      //         buffer.appendBuffer(value)
-      //       }
-      //     })
-      //   }
-      // })
-
-
-      // download(pageParams.id).then(async stream => {
-      //   console.log(new Date())
-      //   const resp = new Response(stream, {
-      //     headers: {
-      //       'Content-Type': data?.file.mime_type,
-      //       'Content-Disposition': `inline; filename="${data?.file.name}"`,
-      //       'Cache-Control': 'public, max-age=604800',
-      //       'ETag': Buffer.from(data?.file.id).toString('base64')
-      //     }
-      //   })
-      //   resp.blob().then(blob => {
-      //     console.log(new Date())
-      //     const url = URL.createObjectURL(blob)
-      //     setBlobURL(url)
-      //   })
-      // })
     }
   }, [data])
 
@@ -152,10 +94,6 @@ const Viewer: React.FC<Props> = ({ data, me, error, mutate, pageParams, isInDraw
   }
 
   const back = () => {
-    // if (errorMe) {
-    //   return history.push('/login')
-    // }
-    // setBlobURL(undefined)
     if (isInDrawer) return onCloseDrawer?.()
     window.close()
     return history.goBack()
@@ -177,23 +115,6 @@ const Viewer: React.FC<Props> = ({ data, me, error, mutate, pageParams, isInDraw
               }
             }} className="viewContent" style={{ height: '100%', width: '100%', position: 'absolute' }} src={links?.raw} frameBorder={0}>Browser not compatible.</iframe> }
 
-        {/* !blobURL ? <Spin style={{ maxHeight: '100%', maxWidth: '100%', position: 'absolute', margin: 'auto', top: 0, right: 0, bottom: 0, left: 0, imageOrientation: 'from-image' }} /> */}
-        {/* {data?.file.type === 'video' ? <video src={blobURL} controls><source src={blobURL} type="video/mp4" /></video> : <iframe ref={iframe} onLoad={async (e: any) => {
-          try {
-            e.target.contentWindow.document.body.style.margin = 'auto'
-            e.target.contentWindow.document.body.style.color = 'rgb(251,251,254)'
-            e.target.contentWindow.document.body.style.maxHeight = '100%'
-            e.target.contentWindow.document.body.style.maxWidth = '100%'
-            e.target.contentWindow.document.body.style.position = 'absolute'
-            e.target.contentWindow.document.body.style.imageOrientation = 'from-image'
-            e.target.contentWindow.document.body.style.top = '0'
-            e.target.contentWindow.document.body.style.bottom = '0'
-            e.target.contentWindow.document.body.style.left = '0'
-            e.target.contentWindow.document.body.style.right = '0'
-          } catch (error) {
-            // ignore
-          }
-        }} className="viewContent" style={{ height: '100%', width: '100%', position: 'absolute' }} src={blobURL} frameBorder={0}>Browser not compatible.</iframe>} */}
 
       </Layout.Content>
       <Layout.Sider width={320} trigger={null} collapsedWidth={0} breakpoint="lg" collapsed={collapsed} onCollapse={setCollapsed}>

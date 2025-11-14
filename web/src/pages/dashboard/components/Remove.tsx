@@ -15,13 +15,11 @@ const Remove: React.FC<Props> = ({
   onFinish }) => {
 
   const [loadingRemove, setLoadingRemove] = useState<boolean>()
-  // const [deleteMessage, setDeleteMessage] = useState<boolean>()
 
   const remove = async (ids: string[]) => {
     setLoadingRemove(true)
     try {
       await Promise.all(ids.map(async id => await req.delete(`/files/${id}`, {
-        // params: { deleteMessage: deleteMessage ? 'true' : undefined }
       })))
     } catch (error) {
       // ignore

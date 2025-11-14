@@ -7,11 +7,11 @@ import { fetcher } from '../../utils/Fetcher'
 import Error from './components/Error'
 import TableFiles from './components/TableFiles'
 import Viewer from './components/Viewer'
-import { useDebounce } from 'use-debounce/lib'
+import { useDebounce } from 'use-debounce'
 
-interface PageProps extends RouteComponentProps<{
+type PageProps = RouteComponentProps<{
   id: string
-}> {}
+}>
 
 const View: React.FC<PageProps & { isInDrawer?: boolean, onCloseDrawer?: () => void }> = ({ match, isInDrawer, onCloseDrawer }) => {
   const [openPassModal, setOpenPassModal] = useState<boolean>(false)
