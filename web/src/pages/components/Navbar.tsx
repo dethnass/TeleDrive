@@ -19,7 +19,6 @@ const Navbar: React.FC<Props> = ({ user }) => {
   const [logoutConfirmation, setLogoutConfirmation] = useState<boolean>(false)
   const [popoverVisibility, setPopoverVisibility] = useState<boolean>(false)
   const [destroySession, setDestroySession] = useState<boolean>(false)
-  // const { data: usage } = useSWR('/users/me/usage', fetcher)
 
   const logout = async () => {
     await req.post('/auth/logout', {}, destroySession ? { params: { destroySession: 1 } } : undefined)

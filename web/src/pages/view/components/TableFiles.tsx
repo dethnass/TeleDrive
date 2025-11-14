@@ -233,7 +233,7 @@ const TableFiles: React.FC<Props> = ({ me, data }) => {
                 responsive: ['md'],
                 width: 250,
                 align: 'center',
-                render: (value: any, row: any) => row.upload_progress !== null ? <>Uploading {Number((row.upload_progress * 100).toFixed(2))}%</> : moment(value).local().format('llll')
+                render: (value: any, row: any) => row.upload_progress !== null ? <>Uploading {Number((row.upload_progress * 100).toFixed(2))}%</> : format(new Date(value), 'EEEE, MMMM d, yyyy h:mm a')
               }
             ]}
             onChange={onChange}
@@ -251,14 +251,11 @@ const TableFiles: React.FC<Props> = ({ me, data }) => {
                     document.removeEventListener('click', onClickOutside)
                   })
                 }
-                // const parent = document.querySelector('.ant-col-24.ant-col-md-20.ant-col-md-offset-2')
                 setPopup({
                   row,
                   visible: true,
                   x: e.clientX,
                   y: e.clientY
-                  // x: e.clientX - (parent?.getBoundingClientRect().left || 0),
-                  // y: e.clientY - (parent?.getBoundingClientRect().top || 0)
                 })
               }
             })} />
@@ -278,7 +275,7 @@ const TableFiles: React.FC<Props> = ({ me, data }) => {
         <Descriptions.Item label="Size">
           {filesParts?.length ? prettyBytes(filesParts?.files.reduce((res: number, file: any) => res + Number(file.size), 0)) + ` (${filesParts?.length} parts)` : showDetails?.size && prettyBytes(Number(showDetails?.size || 0))}
         </Descriptions.Item>
-        <Descriptions.Item label="Uploaded At">{moment(showDetails?.uploaded_at).local().format('lll')}</Descriptions.Item>
+        <Descriptions.Item label="Uploaded At">{format(new Date(showDetails?.uploaded_at), 'MMM d, yyyy h:mm a')}</Descriptions.Item>
       </Descriptions>
     </Modal>
   </Layout>

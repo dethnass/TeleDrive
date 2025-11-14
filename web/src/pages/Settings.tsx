@@ -45,7 +45,7 @@ import {
 } from 'antd'
 import { useForm } from 'antd/es/form/Form'
 import prettyBytes from 'pretty-bytes'
-import pwaInstallHandler from 'pwa-install-handler'
+import { pwaInstallHandler } from 'pwa-install-handler'
 import React, { useEffect, useState } from 'react'
 import { useThemeSwitcher } from 'react-css-theme-switcher'
 import { useHistory } from 'react-router-dom'

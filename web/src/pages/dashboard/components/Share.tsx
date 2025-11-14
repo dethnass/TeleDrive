@@ -1,9 +1,8 @@
 import { KeyOutlined, ArrowRightOutlined, CopyOutlined, InfoCircleOutlined, LinkOutlined, MinusCircleOutlined, PlusOutlined, WarningOutlined } from '@ant-design/icons'
 import { AutoComplete, Button, Col, Divider, Empty, Form, Input, message, Modal, notification, Row, Spin, Switch, Typography } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
-import * as clipboardy from 'clipboardy'
 import React, { useEffect, useState } from 'react'
-import { useDebounce } from 'use-debounce/lib'
+import { useDebounce } from 'use-debounce'
 import { req } from '../../../utils/Fetcher'
 
 interface Props {
@@ -115,7 +114,7 @@ const Share: React.FC<Props> = ({
   }
 
   const copy = (val: string) => {
-    clipboardy.write(val)
+    navigator.clipboard.writeText(val)
     return message.info('Copied!')
   }
 

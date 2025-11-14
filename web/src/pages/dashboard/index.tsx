@@ -36,9 +36,9 @@ import Share from './components/Share'
 import TableFiles from './components/TableFiles'
 import Upload from './components/Upload'
 
-interface PageProps extends RouteComponentProps<{
+type PageProps = RouteComponentProps<{
   type?: string
-}> {}
+}>
 
 const Dashboard: React.FC<PageProps & { me?: any, errorMe?: any }> = ({ match }) => {
   const PAGE_SIZE = 10
@@ -180,7 +180,6 @@ const Dashboard: React.FC<PageProps & { me?: any, errorMe?: any }> = ({ match })
         }
       }).filter(file => file && file.status !== 'success')
       setFileList(list)
-      // setData([...filesUpload.files?.map((file: any) => ({ ...file, key: file.id })), ...data].reduce((res, row) => [
       //   ...res, !res.filter(Boolean).find((r: any) => r.id === row.id) ? row : null
       // ], []).filter(Boolean))
       if ((dataChanges?.pagination?.current || 0) > 1) {

@@ -153,7 +153,9 @@ const TableFiles: React.FC<Props> = ({
             icon={<CloudDownloadOutlined />}
             key="fastdownload"
             onClick={async () => {
-              popup?.row && await directDownload(popup?.row.id, popup?.row.name.replace(/\.part0*\d+$/, ''))
+              if (popup?.row) {
+                await directDownload(popup.row.id, popup.row.name.replace(/\.part0*\d+$/, ''))
+              }
             }}>Fast Download <Tag color="green">beta</Tag></Menu.Item> : ''}
           <Menu.Item {...baseProps}
             icon={<DeleteOutlined />}

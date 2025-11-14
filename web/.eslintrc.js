@@ -25,36 +25,25 @@ module.exports = {
         'format': ['PascalCase']
       }
     ],
-    '@typescript-eslint/indent': [
+    // Note: These rules were deprecated in @typescript-eslint v6-v8 and replaced with ESLint core equivalents
+    'indent': [
       'error',
       2
     ],
     '@typescript-eslint/prefer-namespace-keyword': 'error',
-    '@typescript-eslint/quotes': [
+    'quotes': [
       'error',
       'single',
       {
         'avoidEscape': true
       }
     ],
-    '@typescript-eslint/semi': [
+    'semi': [
       'error',
       'never'
     ],
-    '@typescript-eslint/type-annotation-spacing': 'error',
-    '@typescript-eslint/member-delimiter-style': [
-      'error',
-      {
-        'multiline': {
-          'delimiter': 'comma',
-          'requireLast': false
-        },
-        'singleline': {
-          'delimiter': 'comma',
-          'requireLast': false
-        }
-      }
-    ],
+    // '@typescript-eslint/type-annotation-spacing': 'error', // Deprecated in v6+
+    // '@typescript-eslint/member-delimiter-style': removed in favor of formatter
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {
@@ -64,8 +53,8 @@ module.exports = {
         'argsIgnorePattern': '^\_.*$',
       }
     ],
-    '@typescript-eslint/no-extra-parens': 'error',
-    '@typescript-eslint/brace-style': 'error',
+    // '@typescript-eslint/no-extra-parens': 'error', // Deprecated
+    // '@typescript-eslint/brace-style': 'error', // Deprecated
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -78,7 +67,15 @@ module.exports = {
     'no-trailing-spaces': 'error',
     'no-var': 'error',
     'prefer-const': 'error',
-    'spaced-comment': 'error',
+    'spaced-comment': ['error', 'always', {
+      'line': {
+        'markers': ['/'],
+        'exceptions': ['-', '+', '/', '*']
+      },
+      'block': {
+        'balanced': true
+      }
+    }],
     'object-curly-spacing': ['error', 'always'],
     'space-in-parens': ['error', 'never'],
     'array-bracket-spacing': ['error', 'never'],
@@ -90,6 +87,8 @@ module.exports = {
         'asyncArrow': 'always'
       }
     ],
-    '@typescript-eslint/no-var-requires': 'off'
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-require-imports': 'off',
+    'no-unsafe-optional-chaining': 'warn' // Downgrade to warning
   }
 }

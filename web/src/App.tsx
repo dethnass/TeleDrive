@@ -1,7 +1,7 @@
 import { MobileOutlined, TwitterOutlined } from '@ant-design/icons'
 import { Button, Layout, notification, Result, Typography } from 'antd'
 import 'antd-country-phone-input/dist/index.css'
-import pwaInstallHandler from 'pwa-install-handler'
+import { pwaInstallHandler } from 'pwa-install-handler'
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { useThemeSwitcher } from 'react-css-theme-switcher'
 import { Helmet } from 'react-helmet-async'
