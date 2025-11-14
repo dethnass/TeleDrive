@@ -46,6 +46,7 @@
     "teledrive-client": "^2.8.2",
     "url": "^0.11.4",
     "use-debounce": "^7.0.1",
+    "vm-browserify": "^1.1.2",
     "web-vitals": "^4.2.4",
     "world_countries_lists": "^3.3.0"
   },
@@ -75,6 +76,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.5.2",

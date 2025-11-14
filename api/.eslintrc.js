@@ -51,6 +51,7 @@ module.exports = {
         'args': 'all',
         'varsIgnorePattern': '^\_.*$',
         'argsIgnorePattern': '^\_.*$',
+        'caughtErrors': 'none' // Ignore unused catch block errors
       }
     ],
     // '@typescript-eslint/no-extra-parens': 'error', // Deprecated

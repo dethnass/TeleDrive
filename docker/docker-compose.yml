@@ -26,7 +26,8 @@ services:
       - redis
 
   db:
-    image: postgres:13
+    # Security: Updated from postgres:13 (EOL Nov 2023) to postgres:15-alpine
+    image: postgres:15-alpine
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -36,7 +37,8 @@ services:
       - teledrive_data:/var/lib/postgresql/data
 
   redis:
-    image: redis:6
+    # Security: Updated from redis:6 to redis:7-alpine
+    image: redis:7-alpine
     restart: always
 
 volumes:
