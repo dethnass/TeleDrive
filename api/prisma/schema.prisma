@@ -74,6 +74,7 @@ model users {
   plan            String?   @db.VarChar
   settings        Json?
   role            String?   @db.VarChar
+  tg_session      String?   @db.Text
   files           files[]
 
   @@index([tg_id], map: "tg_id")
