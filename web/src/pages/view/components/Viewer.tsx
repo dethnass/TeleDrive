@@ -18,8 +18,8 @@ import {
   Dropdown, Input,
   Layout, Menu, message, notification, Space, Tag, Typography
 } from 'antd'
-import * as clipboardy from 'clipboardy'
-import moment from 'moment'
+// clipboardy replaced with native Clipboard API
+import { format } from 'date-fns'
 import prettyBytes from 'pretty-bytes'
 import React, { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player'
@@ -147,7 +147,7 @@ const Viewer: React.FC<Props> = ({ data, me, error, mutate, pageParams, isInDraw
   }, [error])
 
   const copy = (val: string) => {
-    clipboardy.write(val)
+    navigator.clipboard.writeText(val)
     return message.info('Copied!')
   }
 
@@ -206,7 +206,7 @@ const Viewer: React.FC<Props> = ({ data, me, error, mutate, pageParams, isInDraw
             <Descriptions.Item label="Size">
               {datafilesParts?.length ? prettyBytes(datafilesParts?.files.reduce((res: number, file: any) => res + Number(file.size), 0)) + ` (${datafilesParts?.length} parts)` : data?.file.size && prettyBytes(Number(data?.file.size || 0))}
             </Descriptions.Item>
-            <Descriptions.Item label="Uploaded At">{moment(data?.file.uploaded_at).local().format('lll')}</Descriptions.Item>
+            <Descriptions.Item label="Uploaded At">{format(new Date(data?.file.uploaded_at), 'MMM d, yyyy h:mm a')}</Descriptions.Item>
             {user?.user && <Descriptions.Item label="Uploaded By">
               <a href={`https://t.me/${user?.user.username}`} target="_blank">@{user?.user.username}</a>
             </Descriptions.Item>}

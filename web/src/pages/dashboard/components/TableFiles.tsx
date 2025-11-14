@@ -17,7 +17,7 @@ import {
 } from '@ant-design/icons'
 import { Descriptions, Menu, Modal, Table, Tag, Typography } from 'antd'
 import { SorterResult } from 'antd/lib/table/interface'
-import moment from 'moment'
+import { format } from 'date-fns'
 import prettyBytes from 'pretty-bytes'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { DndProvider, useDrag, useDrop } from 'react-dnd'
@@ -246,7 +246,7 @@ const TableFiles: React.FC<Props> = ({
       responsive: ['md'],
       width: 250,
       align: 'center',
-      render: (value: any, row: any) => row.upload_progress !== null ? <>Uploading...</> : moment(value).local().format('llll')
+      render: (value: any, row: any) => row.upload_progress !== null ? <>Uploading...</> : format(new Date(value), 'EEEE, MMMM d, yyyy h:mm a')
     }
   ]
 
@@ -335,7 +335,7 @@ const TableFiles: React.FC<Props> = ({
         expandable={me?.settings?.expandable_rows && window.innerWidth < 752 ? {
           expandedRowRender: (row: any) => <Descriptions labelStyle={{ fontWeight: 'bold' }} column={1}>
             <Descriptions.Item label="Size">{row.size ? prettyBytes(Number(row.size)) : '-'}</Descriptions.Item>
-            <Descriptions.Item label="Uploaded At">{row.upload_progress !== null ? <>Uploading {Number((row.upload_progress * 100).toFixed(2))}%</> : moment(row.uploaded_at).local().format('lll')}</Descriptions.Item>
+            <Descriptions.Item label="Uploaded At">{row.upload_progress !== null ? <>Uploading {Number((row.upload_progress * 100).toFixed(2))}%</> : format(new Date(row.uploaded_at), 'MMM d, yyyy h:mm a')}</Descriptions.Item>
           </Descriptions>,
           rowExpandable: (_: any) => window.innerWidth < 752,
         } : undefined} />
@@ -355,7 +355,7 @@ const TableFiles: React.FC<Props> = ({
         <Descriptions.Item label="Size">
           {filesParts?.length ? prettyBytes(filesParts?.files.reduce((res: number, file: any) => res + Number(file.size), 0)) + ` (${filesParts?.length} parts)` : showDetails?.size && prettyBytes(Number(showDetails?.size || 0))}
         </Descriptions.Item>
-        <Descriptions.Item label="Uploaded At">{moment(showDetails?.uploaded_at).local().format('lll')}</Descriptions.Item>
+        <Descriptions.Item label="Uploaded At">{format(new Date(showDetails?.uploaded_at), 'MMM d, yyyy h:mm a')}</Descriptions.Item>
         <Descriptions.Item label="Uploaded By">
           <a href={`https://t.me/${user?.user.username}`} target="_blank">@{user?.user.username}</a>
         </Descriptions.Item>

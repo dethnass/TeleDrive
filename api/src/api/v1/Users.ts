@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client'
 import axios from 'axios'
 import { Request, Response } from 'express'
-import moment from 'moment'
+import { addDays } from 'date-fns'
 import { Api } from 'teledrive-client'
 import { prisma } from '../../model'
 import { Redis } from '../../service/Cache'
@@ -34,7 +34,7 @@ export class Users {
         data: {
           key: req.user ? `u:${req.user.id}` : `ip:${req.headers['cf-connecting-ip'] as string || req.ip}`,
           usage: 0,
-          expire: moment().add(1, 'day').toDate()
+          expire: addDays(new Date(), 1)
         }
       })
     }
@@ -43,7 +43,7 @@ export class Users {
       await prisma.usages.update({
         where: { key: usage.key },
         data: {
-          expire: moment().add(1, 'day').toDate(),
+          expire: addDays(new Date(), 1),
           usage: 0,
         }
       })
@@ -55,11 +55,11 @@ export class Users {
   @Endpoint.GET('/', { middlewares: [Auth] })
   public async find(req: Request, res: Response): Promise<any> {
     const { sort, offset, limit, search, ...filters } = req.query
-    const where = {
+    const where: any = {
       ...search ? {
         OR: [
-          { username: { contains: search } },
-          { name: { contains: search } },
+          { username: { contains: search as string } },
+          { name: { contains: search as string } },
         ]
       } : filters
     }

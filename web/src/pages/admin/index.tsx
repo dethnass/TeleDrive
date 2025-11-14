@@ -1,6 +1,6 @@
 import { CloseCircleFilled, DeleteOutlined, ReloadOutlined, UserSwitchOutlined } from '@ant-design/icons'
 import { Button, Col, Form, Input, Layout, notification, Popconfirm, Row, Space, Switch, Table, Tag, Tooltip, Typography } from 'antd'
-import moment from 'moment'
+import { format } from 'date-fns'
 import QueryString from 'qs'
 import { FC, useEffect, useState } from 'react'
 import useSWR from 'swr'
@@ -189,7 +189,7 @@ const Admin: FC<Props> = ({ me, errorMe }) => {
                   width: 230,
                   sorter: true,
                   // responsive: ['md'],
-                  render: (value: any) => moment(value).local().format('llll')
+                  render: (value: any) => format(new Date(value), 'EEEE, MMMM d, yyyy h:mm a')
                 },
                 {
                   title: '',

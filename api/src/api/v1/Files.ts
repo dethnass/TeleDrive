@@ -6,7 +6,7 @@ import contentDisposition from 'content-disposition'
 import { AES, enc } from 'crypto-js'
 import { Request, Response } from 'express'
 import { appendFileSync, createReadStream, existsSync, mkdirSync, readdirSync, renameSync, rmSync, statSync, writeFileSync } from 'fs'
-import moment from 'moment'
+import { addDays } from 'date-fns'
 import multer from 'multer'
 import { tmpdir } from 'os'
 import { Api, Logger, TelegramClient } from 'teledrive-client'
@@ -1043,7 +1043,7 @@ export class Files {
         data: {
           key: req.user ? `u:${req.user.id}` : `ip:${req.headers['cf-connecting-ip'] as string || req.ip}`,
           usage: 0,
-          expire: moment().add(1, 'day').toDate()
+          expire: addDays(new Date(), 1)
         }
       })
     }
@@ -1051,7 +1051,7 @@ export class Files {
     if (new Date().getTime() - new Date(usage.expire).getTime() > 0) {   // is expired
       usage = await prisma.usages.update({
         data: {
-          expire: moment().add(1, 'day').toDate(),
+          expire: addDays(new Date(), 1),
           usage: 0
         },
         where: { key: usage.key }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { HelmetProvider } from 'react-helmet-async'
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
@@ -13,11 +14,13 @@ if (!container) throw new Error('Failed to find the root element')
 const root = createRoot(container)
 
 root.render(
-  <ThemeSwitcherProvider defaultTheme="dark" themeMap={{ light: '/app.css', dark: '/app.dark.css' }}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ThemeSwitcherProvider>
+  <HelmetProvider>
+    <ThemeSwitcherProvider defaultTheme="dark" themeMap={{ light: '/app.css', dark: '/app.dark.css' }}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeSwitcherProvider>
+  </HelmetProvider>
 )
 
 // If you want your app to work offline and load faster, you can change
