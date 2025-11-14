@@ -1,12 +1,14 @@
 {
   "version": 2,
+  "buildCommand": "yarn build",
   "env": {},
   "builds": [
     {
       "src": "api/dist/index.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["api/dist/**"],
+        "maxLambdaSize": "50mb",
+        "includeFiles": ["api/dist/**", "api/prisma/**", "api/keys"],
         "excludeFiles": [
           "web/**",
           "android/**",
@@ -37,16 +39,29 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/api/(.*)",
       "dest": "api/dist/index.js"
+    },
+    {
+      "src": "/ping",
+      "dest": "api/dist/index.js"
+    },
+    {
+      "src": "/security.txt",
+      "dest": "api/dist/index.js"
+    },
+    {
+      "src": "/(.*\\.(js|css|ico|png|jpg|jpeg|svg|woff|woff2|ttf|eot))",
+      "dest": "web/build/$1"
     },
     {
       "src": "/",
       "dest": "web/build/index.html"
     },
     {
-      "src": "/(.+)",
-      "dest": "web/build/$1"
+      "src": "/(.*)",
+      "dest": "web/build/index.html"
     }
-  ]
+  ],
+  "regions": ["iad1"]
 }
