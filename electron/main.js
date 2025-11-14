@@ -16,7 +16,9 @@ app.on("ready", () => {
   //mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   // Option 2: Load directly an URL if you don't need interface customization
-mainWindow.loadURL("https://teledriveapp.herokuapp.com/startup");
+  // SECURITY: Use environment variable instead of hardcoded URL
+  const appUrl = process.env.TELEDRIVE_URL || "http://localhost:3000/startup";
+  mainWindow.loadURL(appUrl);
 
   // Option 3: Uses BrowserView to load an URL
   //const view = require("./src/view");

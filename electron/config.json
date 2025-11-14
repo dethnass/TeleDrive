@@ -1,4 +1,4 @@
 {
-  "dest": "D:/Onedrive/Documents/GitHub/teledrive/electron/windowsinstaller",
+  "dest": "./windowsinstaller",
   "icon": "assets/icons/win/icon.ico"
 }

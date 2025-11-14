@@ -1,4 +1,5 @@
-FROM node:16.14.0 as build
+# Security: Updated from node:16.14.0 (EOL) to node:20-alpine
+FROM node:20-alpine as build
 ARG REACT_APP_TG_API_ID
 ARG REACT_APP_TG_API_HASH
 

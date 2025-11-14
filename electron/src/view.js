@@ -5,5 +5,7 @@ exports.createBrowserView = (mainWindow) => {
   const view = new BrowserView();
   mainWindow.setBrowserView(view);
   view.setBounds({ x: 0, y: 0, width: 1024, height: 768 });
-  view.webContents.loadURL("https://teledriveapp.herokuapp.com/startup");
+  // SECURITY: Use environment variable instead of hardcoded URL
+  const appUrl = process.env.TELEDRIVE_URL || "http://localhost:3000/startup";
+  view.webContents.loadURL(appUrl);
 };

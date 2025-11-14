@@ -18,7 +18,8 @@ export const Endpoint = {
   _handlers: [],
   register: function (..._classes: any[]): Router {
     const router = Router()
-    for (const route of this._handlers?.filter((handler: Route) => !!handler.basepath)) {
+    const handlers = this._handlers || []
+    for (const route of handlers.filter((handler: Route) => !!handler.basepath)) {
       router[route.method](`${route.basepath}${route.path}`,
         ...(route.middlewares || []).map((middleware: RequestHandler) => this.RequestWrapper(middleware)), route.handler)
     }
